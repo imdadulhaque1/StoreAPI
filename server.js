@@ -1,11 +1,12 @@
 require("dotenv").config();
+require("express-async-errors");
 const express = require("express");
 const app = express();
 
-//TODO:------> async Errors
 const notFoundMiddleware = require("./src/middlewares/notFound");
 const errorMiddleware = require("./src/middlewares/errorHandler");
 const connectDB = require("./src/db/connectDB");
+const productRoute = require("./src/api/routes/productRoute");
 
 //TODO:------> middlewares(Not using in this projects but write to understand the syntax)
 app.use(express.json());
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 //TODO:------> Products Routes
+app.use("/api/products", productRoute);
 
 //TODO:------> Middleware Call
 app.use(notFoundMiddleware);
