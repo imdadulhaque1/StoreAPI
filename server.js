@@ -5,6 +5,7 @@ const app = express();
 //TODO:------> async Errors
 const notFoundMiddleware = require("./src/middlewares/notFound");
 const errorMiddleware = require("./src/middlewares/errorHandler");
+const connectDB = require("./src/db/connectDB");
 
 //TODO:------> middlewares(Not using in this projects but write to understand the syntax)
 app.use(express.json());
@@ -25,6 +26,7 @@ const port = process.env.PORT || 3000;
 const startServer = async () => {
   try {
     // ConnectDB
+    connectDB(process.env.MONGO_URI);
     app.listen(port, console.log(`Server is listening PORT @${port}`));
   } catch (error) {
     console.log(error);
